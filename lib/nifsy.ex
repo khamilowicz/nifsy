@@ -23,6 +23,8 @@ defmodule Nifsy do
 
   @type options :: [option]
 
+  @type line_or_bytes :: :line | pos_integer
+
   @doc """
   Open the file at `path` for `mode` operations with `options`.
 
@@ -143,9 +145,9 @@ defmodule Nifsy do
 
   The `options` are the same as can be provided to `open/3`.
   """
-  @spec stream!(Path.t, options) :: Stream.t
-  def stream!(path, options \\ []) do
-    %Nifsy.Stream{path: path, options: options}
+  @spec stream!(Path.t, options, line_or_bytes) :: Stream.t
+  def stream!(path, options \\ [], line_or_bytes \\ :line) do
+    %Nifsy.Stream{path: path, options: options, line_or_bytes: line_or_bytes}
   end
 
   defp init_options([], acc) do

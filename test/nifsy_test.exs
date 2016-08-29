@@ -56,6 +56,9 @@ defmodule NifsyTest do
     stream = Nifsy.stream!("tmp/test/test.txt", [:create])
     assert Enum.to_list(stream) == ["test", "test2"]
 
+    stream = Nifsy.stream!("tmp/test/test.txt", [:create], 2)
+    assert Enum.to_list(stream) == ["te", "st", "\nt", "es", "t2"]
+
     ["test", ["\n", "test", "2"]]
     |> Stream.into(stream)
     |> Stream.run()
